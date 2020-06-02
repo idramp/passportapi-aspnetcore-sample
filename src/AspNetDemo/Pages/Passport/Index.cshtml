@@ -1,0 +1,82 @@
+﻿@page
+@model AspNetDemo.Pages.Passport.IndexModel
+@{
+    ViewData["Title"] = "Welcome";
+}
+
+    <div class="container">
+        <div class="row">
+            <div class="container-fluid">
+                <h1>Welcome</h1>
+                @if (Model.Connection != null)
+                {
+                    <p>This session is connected to an Identity Wallet.</p>
+                }
+                else
+                {
+                    <p>There is no Identity Wallet associated with this session.</p>
+                }
+            </div>
+        </div>
+        @if (Model.Connection != null)
+        {
+            <div class="row">
+                <dl>
+                    <dt>Connection Id</dt>
+                    <dd>@Model.Connection.Id</dd>
+
+                    <dt>Identity Wallet's Name</dt>
+                    <dd>@Model.Connection.AliasName</dd>
+
+                    <dt>Connection Created On (UTC)</dt>
+                    <dd>@Model.Connection.CreatedAtUtc?.ToString("yyyy-MM-dd HH:mm:ss")</dd>
+                </dl>
+            </div>
+        }
+
+        <h3>Connectionless Actions</h3>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">New Connection</h5>
+                        <p class="card-text">Create a new connection with an Identity Wallet.</p>
+                        <a asp-page="./Connect" class="btn btn-primary">Connect</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Proof</h5>
+                        <p class="card-text">Create a proof request. It will be displayed on the page as a QR code for the user to scan with their Identity Wallet.</p>
+                        <a asp-page="./ConnectionlessProof" class="btn btn-primary">Display Proof</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Connection Actions</h3>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Proof</h5>
+                        <p class="card-text">Create a proof request and send it to the Identity Wallet attached to this session directly.</p>
+                        <a asp-page="./ConnectionProof" class="btn btn-primary">Send Proof</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Issue a Credential</h5>
+                        <p class="card-text">Create a credential offer and send it to the Identity Wallet attached to this session directly. Note: the first time this is used will take <span class="font-weight-bolder">some time</span> to return because the API will be creating a new credential definition. Please allow it to run to completion.</p>
+                        <a asp-page="./ConnectionOffer" class="btn btn-primary">Send Offer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

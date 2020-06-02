@@ -1,0 +1,35 @@
+﻿@page
+@model AspNetDemo.Pages.Passport.ConnectionlessProofModel
+<div class="container">
+    <div class="row">
+        <h3>Connectionless Proof Request</h3>
+    </div>
+    <div class="row">
+        @if (Model.Proof != null)
+        {
+            <div class="col-md-6">
+                <div id="qrCode"></div>
+
+                <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs@0.0.2/qrcode.min.js"></script>
+                <script src="~/js/embed.js"></script>
+                <script type="text/javascript">
+                        var checkDoneUrl = '@Html.Raw(Url.Page("./ConnectionlessProof", "ProofStatus", new { proofId = Model.Proof.Id }, "https"))';
+                        var contents = '@Html.Raw(Model.Proof.RequestUrl)';
+                        var redirect = '@Html.Raw(Url.Page("./Display", null, new { id = Model.Proof.Id }, "https"))';
+                        embedQR('qrCode', contents, checkDoneUrl, redirect);
+                </script>
+            </div>
+            <div class="col-md-6">
+                <h2>Instructions</h2>
+                <p>
+                    Use your your Identity Wallet to scan the QR code. It will ask for an email credential.
+                </p>
+            </div>
+
+        }
+        else
+        {
+            <a asp-page="./Proof" class="btn btn-primary btn-lg">Request Again</a>
+        }
+    </div>
+</div>

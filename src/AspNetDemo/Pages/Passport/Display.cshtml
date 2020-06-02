@@ -1,0 +1,67 @@
+﻿@page "{id}"
+@model AspNetDemo.Pages.Passport.DisplayModel
+@{
+    ViewData["Title"] = "Display Proof";
+}
+
+<h1>Display Proof</h1>
+
+@if(Model.Proof == null)
+{
+    <p>Proof not found</p>
+}
+else
+{
+<dl>
+    <dt>Proof Id</dt>
+    <dd>@Model.Proof.Id</dd>
+
+    <dt>State</dt>
+    <dd>@Model.Proof.State</dd>
+
+    @if (Model.Proof.AttributeValues?.Count > 0)
+    {
+        <dt>
+            Attribute Values
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Value</th>
+                </tr>
+                @foreach (var attr in Model.Proof.AttributeValues)
+                {
+                    <tr>
+                        <td>@attr.AttributeId</td>
+                        <td>@attr.Name</td>
+                        <td>@attr.Value</td>
+                    </tr>
+                }
+            </table>
+        </dd>
+    } else if (Model.Proof.RequestedAttributes?.Count > 0)
+    {
+        <dt>
+            Requested Attributes
+        </dt>
+        <dd>
+
+            <table class="table">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                </tr>
+                @foreach (var attr in Model.Proof.RequestedAttributes)
+                {
+                    <tr>
+                        <td>@attr.Id</td>
+                        <td>@attr.Name</td>
+                    </tr>
+                }
+            </table>
+        </dd>
+    }
+    </dl>
+}

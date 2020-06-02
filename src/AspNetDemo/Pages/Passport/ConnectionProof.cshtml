@@ -1,0 +1,23 @@
+﻿@page
+@model AspNetDemo.Pages.Passport.ConnectionProofModel
+<div class="container">
+    <div class="row">
+        <div class="container-fluid">
+            <h3>Connection Proof Request</h3>
+            <p>
+                The server is making a request to the established connection for an email credential. 
+                Check your Identity Wallet for the request.
+            </p>
+            <p>Awaiting response...</p>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="~/js/embed.js"></script>
+    <script type="text/javascript">
+        var checkDoneUrl = '@Html.Raw(Url.Page("./ConnectionProof", "ProofStatus", new { proofId = Model.Proof.Id }, "https"))';
+        var redirect = '@Html.Raw(Url.Page("./Display", null, new { id = Model.Proof.Id }, "https"))';
+        justWatch(checkDoneUrl, redirect);
+    </script>
+}
