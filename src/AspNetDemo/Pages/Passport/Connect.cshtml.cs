@@ -42,7 +42,11 @@ namespace AspNetDemo.Pages.Passport
 
                 if (connection.State == PassportApi.ConnectionState.Connected)
                 {
-                    return RedirectToPage("./Email");
+                    if (!string.IsNullOrEmpty(ReturnUrl) && Url.IsLocalUrl(ReturnUrl))
+                    {
+                        return Redirect(ReturnUrl);
+                    }
+                    return RedirectToPage("./ConnectionProof");
                 }
                 else
                 {

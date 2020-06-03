@@ -62,7 +62,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Proof</h5>
-                        <p class="card-text">Create a proof request and send it to the Identity Wallet attached to this session directly.</p>
+                        <p class="card-text">Create a proof request and send it to the Identity Wallet attached to this session.</p>
                         <a asp-page="./ConnectionProof" class="btn btn-primary">Send Proof</a>
                     </div>
                 </div>
@@ -72,8 +72,18 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Issue a Credential</h5>
-                        <p class="card-text">Create a credential offer and send it to the Identity Wallet attached to this session directly. Note: the first time this is used will take <span class="font-weight-bolder">some time</span> to return because the API will be creating a new credential definition. Please allow it to run to completion.</p>
+                        <p class="card-text">Create a credential offer and send it to the Identity Wallet attached to this session. Note: the first time this is used will take <span class="font-weight-bolder">some time</span> to return because the API will be creating a new credential definition. Please allow it to run to completion.</p>
                         <a asp-page="./ConnectionOffer" class="btn btn-primary">Send Offer</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Basic Messages</h5>
+                        <p class="card-text">Send and receive basic messages. These are plain text messages which will be sent to the the Identity Wallet attached to this session.</p>
+                        <a asp-page="./BasicMessage" class="btn btn-primary">Send Message</a>
                     </div>
                 </div>
             </div>

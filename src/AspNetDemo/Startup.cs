@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,10 +28,12 @@ namespace AspNetDemo
             services.AddPassportAPI(options =>
             {
                 options.BearerToken = bearerToken;
+                options.ApiEndpointUrl = "https://passport-api-test.azurewebsites.net/";
             });
             services.AddSingleton<Services.ConnectionApiService>();
             services.AddSingleton<Services.ProofApiService>();
             services.AddSingleton<Services.CredentialApiService>();
+            services.AddSingleton<Services.BasicMessageApiService>();
 
             services.AddAuthentication()
                 // create a cookie to store the Mobile Identity Wallet's connection id
