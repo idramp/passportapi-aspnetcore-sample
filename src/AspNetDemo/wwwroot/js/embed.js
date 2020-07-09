@@ -38,7 +38,7 @@ function embed(embedConfig, redirect, size) {
     });
 
     var btn = document.createElement("a");
-    btn.href = embedConfig.contents.replace(/https:\/\//i, "indy://");
+    btn.href = embedConfig.contents;
     btn.text = "Open in Identity Wallet";
     btn.className = "btn btn-secondary";
     var div = document.createElement("div");
