@@ -6,7 +6,7 @@ using AspNetDemo.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AspNetDemo.Pages.Passport
+namespace AspNetDemo.Pages.Passport.Revocable
 {
     [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Models.AuthConstants.CookieScheme)]
     public class RevokableOfferModel : PageModel
@@ -24,7 +24,7 @@ namespace AspNetDemo.Pages.Passport
         {
             string connectionId = User.GetConnectionId();
             if (connectionId == null)
-                return RedirectToPage("./Connect", new { returnUrl = Url.Page("./ConnectionOffer") });
+                return RedirectToPage("./Connect", new { returnUrl = Url.Page("./RevocableOffer") });
 
             Offer = await _passportService.IssueRoleCredential(connectionId, "guest");
             return Page();

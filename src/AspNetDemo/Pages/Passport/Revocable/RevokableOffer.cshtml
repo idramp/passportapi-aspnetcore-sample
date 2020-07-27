@@ -1,5 +1,5 @@
 ﻿@page
-@model AspNetDemo.Pages.Passport.RevokableOfferModel
+@model AspNetDemo.Pages.Passport.Revocable.RevokableOfferModel
 <div class="container">
     <div class="row">
         <div class="container-fluid">
@@ -16,8 +16,8 @@
 {
     <script src="~/js/embed.js"></script>
     <script type="text/javascript">
-        var checkDoneUrl = '@Html.Raw(Url.Page("./ConnectionOffer", "Status", new { proofId = Model.Offer.Id }, "https"))';
-        var redirect = '@Html.Raw(Url.Page("./Index"))';
+        var checkDoneUrl = '@Html.Raw(Url.Page("./RevocableOffer", "Status", new { id = Model.Offer.Id }, "https"))';
+        var redirect = '@Html.Raw(Url.Page("./RevocableOffer", "Continue", new { id = Model.Offer.Id }, "https"))';
         justWatch(checkDoneUrl, redirect);
     </script>
 }
