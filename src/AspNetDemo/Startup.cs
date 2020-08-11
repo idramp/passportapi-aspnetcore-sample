@@ -25,10 +25,11 @@ namespace AspNetDemo
         public void ConfigureServices(IServiceCollection services)
         {
             string bearerToken = Configuration.GetValue<string>("passportApiBearerToken");
+            string apiEndpoint = Configuration.GetValue<string>("apiEndpoint");
             services.AddPassportAPI(options =>
             {
                 options.BearerToken = bearerToken;
-                options.ApiEndpointUrl = "https://passport-api-test.azurewebsites.net/";
+                options.ApiEndpointUrl = apiEndpoint ?? options.ApiEndpointUrl;
             });
             services.AddSingleton<Services.ConnectionApiService>();
             services.AddSingleton<Services.ProofApiService>();
