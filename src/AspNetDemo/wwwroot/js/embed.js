@@ -1,7 +1,6 @@
 ﻿var embedBaseUrl = window.origin;
 
 function embedQR(elementId, contents, checkUrl, redirect, size) {
-
     var config = {
         elementId: elementId,
         contents: contents,
@@ -20,7 +19,6 @@ function justWatch(checkUrl, redirect) {
 }
 
 function embed(embedConfig, redirect, size) {
-    
     if (size)
         embedConfig.size = size;
     else
@@ -82,7 +80,6 @@ function httpGetAsync(theUrl, callback) {
 }
 
 function stopDoneCheck(config) {
-
     var element = document.getElementById(config.elementId);
     while (element && element.lastElementChild) {
         element.removeChild(element.lastElementChild);
@@ -90,5 +87,4 @@ function stopDoneCheck(config) {
 
     window.clearInterval(config.doneCheckInterval);
     window.clearTimeout(config.stopCheckTimeout);
-
 }

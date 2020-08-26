@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿
 namespace AspNetDemo.Models
 {
+    // TODO jmason : Needed? It's not referenced.
     public class ProofAttribute
     {
         /// <summary>

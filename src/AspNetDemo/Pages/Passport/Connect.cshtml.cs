@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AspNetDemo.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace AspNetDemo.Pages.Passport
 {
     [AllowAnonymous]
-    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Models.AuthConstants.CookieScheme)]
+    [Authorize(AuthenticationSchemes = Models.AuthConstants.CookieScheme)]
     public class ConnectModel : PageModel
     {
         private readonly ConnectionApiService _passportService;
@@ -21,6 +18,7 @@ namespace AspNetDemo.Pages.Passport
             _passportService = passportService;
         }
 
+        // TODO jmason : This doesn't appear to ever actually be used. It's only displayed in a partial view that doesn't exist, I think.
         [TempData]
         public string Message { get; set; }
 
@@ -85,7 +83,7 @@ namespace AspNetDemo.Pages.Passport
             if (connection.State == PassportApi.ConnectionState.Connected)
             {
                 await HttpContext.Login(connection.Id);
-                return RedirectToPage("./Index");
+                return RedirectToPage("./Index"); // TODO jumason : Use ReturnUrl instead if set, meaning we came from a proof/credential page request?
             }
             else
             {

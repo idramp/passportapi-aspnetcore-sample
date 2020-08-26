@@ -1,11 +1,11 @@
 ﻿@page
-@model AspNetDemo.Pages.Passport.Revocable.RevokableOfferModel
+@model AspNetDemo.Pages.Passport.Revocable.RevocableOfferModel
 <div class="container">
     <div class="row">
         <div class="container-fluid">
             <h3>Connection Credential Offer</h3>
             <p>
-                The server is sending an email credential offer to the established connection.
+                The server is sending a revocable "role" credential offer to the established connection.
                 Check your Identity Wallet for the offer.
             </p>
             <p>Awaiting response...</p>
@@ -17,7 +17,7 @@
     <script src="~/js/embed.js"></script>
     <script type="text/javascript">
         var checkDoneUrl = '@Html.Raw(Url.Page("./RevocableOffer", "Status", new { id = Model.Offer.Id }, "https"))';
-        var redirect = '@Html.Raw(Url.Page("./RevocableOffer", "Continue", new { id = Model.Offer.Id }, "https"))';
+        var redirect = '@Html.Raw(Url.Page("../Index"))'; // TODO jmason : do a continue-type thing like the /Connect page?
         justWatch(checkDoneUrl, redirect);
     </script>
 }

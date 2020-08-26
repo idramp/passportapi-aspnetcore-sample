@@ -1,24 +1,27 @@
-﻿using PassportApi;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using PassportApi;
 
 namespace AspNetDemo.Services
 {
     public class ProofApiService
     {
-        private readonly PassportApi.swaggerClient _client;
-        public ProofApiService(
-            PassportApi.swaggerClient client)
+        private readonly swaggerClient _client;
+
+        public ProofApiService(swaggerClient client)
         {
             _client = client;
         }
 
-
         public Task<ProofStateModel> GetProof(string proofId)
         {
             return _client.GetProofAsync(proofId);
+        }
+
+        public Task<ProofState> GetProofState(string proofId)
+        {
+            return _client.GetProofStatusAsync(proofId);
         }
 
         public async Task<ProofRequestModel> GetEmailProof(string connectionId = null)
@@ -31,11 +34,6 @@ namespace AspNetDemo.Services
             });
         }
 
-        public Task<ProofState> GetProofState(string proofId)
-        {
-            return _client.GetProofStatusAsync(proofId);
-        }
-
         private string _emailProofId = null;
         private async Task<string> GetEmailProofId()
         {
@@ -45,7 +43,7 @@ namespace AspNetDemo.Services
                 if (_emailProofId == null)
                 {
                     _emailProofId = await CreateEmailProofConfig();
-                    FileStorage.StoreEmailProofIdFromFile(_emailProofId);
+                    FileStorage.StoreEmailProofIdToFile(_emailProofId);
                 }
             }
             return _emailProofId;

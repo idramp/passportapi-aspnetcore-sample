@@ -1,16 +1,13 @@
-﻿using PassportApi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
+using PassportApi;
 
 namespace AspNetDemo.Services
 {
     public class RevocableCredentialApiService
     {
-        private readonly PassportApi.swaggerClient _client;
-        public RevocableCredentialApiService(
-            PassportApi.swaggerClient client)
+        private readonly swaggerClient _client;
+        public RevocableCredentialApiService(swaggerClient client)
         {
             _client = client;
         }
@@ -28,12 +25,12 @@ namespace AspNetDemo.Services
                 ConnectionId = connectionId,
                 CredentialDefinitionId = emailCredDefId,
                 CredentialName = "Role",
-                Values = new AttributeValue[] { 
+                Values = new AttributeValue[] {
                     new AttributeValue ()
                     {
                         Name = "Role",
                         Value = role
-                    } 
+                    }
                 }
             });
         }
@@ -63,7 +60,7 @@ namespace AspNetDemo.Services
             IdModel result = await _client.CreateCredentialDefinitionAsync(new CreateCredentialDefinitionModel
             {
                 SchemaId = "ATfEGD9UJ2pzunx9LmoE4f:2:RC:1.0",
-                Tag = "role-"+ DateTime.UtcNow.ToString("yyyyMMddHHmmss"),
+                Tag = "role-" + DateTime.UtcNow.ToString("yyyyMMddHHmmss"),
                 EnableRevocation = true
             });
             return result.Id;
