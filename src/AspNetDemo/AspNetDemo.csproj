@@ -25,6 +25,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties openapis_4swagger_1json__JsonSchema="https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/schemas/v3.0/schema.json" /></VisualStudio></ProjectExtensions>
+
 
 
 </Project>
