@@ -30,9 +30,9 @@ namespace AspNetDemo.Pages.Passport
             return Page();
         }
 
-        public async Task<IActionResult> OnGetStatusAsync(string id)
+        public async Task<IActionResult> OnGetStatusAsync(string credentialId)
         {
-            PassportApi.CredentialState state = await _passportService.GetCredentialState(id);
+            PassportApi.CredentialState state = await _passportService.GetCredentialState(credentialId);
 
             if (state == PassportApi.CredentialState.Issued ||
                 state == PassportApi.CredentialState.Rejected)
