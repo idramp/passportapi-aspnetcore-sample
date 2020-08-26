@@ -17,7 +17,7 @@ namespace AspNetDemo.Pages.Passport
             _passportService = passportService;
         }
 
-        public ProofRequestModel Proof { get; set; }
+        public CreateProofRequestResultModel Proof { get; set; }
 
         public async Task<IActionResult> OnGet()
         {

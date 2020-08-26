@@ -14,17 +14,18 @@ namespace AspNetDemo.Services
             _client = client;
         }
 
+        // TODO jmason : deal with the new verify param
         public Task<ProofStateModel> GetProof(string proofId)
         {
-            return _client.GetProofAsync(proofId);
+            return _client.GetProofAsync(proofId, verify: true);
         }
 
         public Task<ProofState> GetProofState(string proofId)
         {
-            return _client.GetProofStatusAsync(proofId);
+            return _client.GetProofStatusAsync(proofId, verify: true);
         }
 
-        public async Task<ProofRequestModel> GetEmailProof(string connectionId = null)
+        public async Task<CreateProofRequestResultModel> GetEmailProof(string connectionId = null)
         {
             string emailProofId = await GetEmailProofId();
             return await _client.CreateProofAsync(new CreateProofRequestModel

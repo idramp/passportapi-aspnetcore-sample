@@ -3,6 +3,7 @@ using AspNetDemo.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PassportApi;
 
 namespace AspNetDemo.Pages.Passport
 {
@@ -18,7 +19,7 @@ namespace AspNetDemo.Pages.Passport
             _passportService = passportService;
         }
 
-        public PassportApi.ProofRequestModel Proof { get; set; }
+        public CreateProofRequestResultModel Proof { get; set; }
 
         public async Task OnGet()
         {
@@ -27,7 +28,7 @@ namespace AspNetDemo.Pages.Passport
 
         public async Task<IActionResult> OnGetProofStatusAsync(string proofId)
         {
-            PassportApi.ProofState state = await _passportService.GetProofState(proofId);
+            ProofState state = await _passportService.GetProofState(proofId);
 
             if (state == PassportApi.ProofState.Accepted)
                 return new JsonResult(true);
