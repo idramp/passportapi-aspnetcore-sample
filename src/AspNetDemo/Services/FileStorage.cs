@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace AspNetDemo.Services
 {
@@ -39,7 +40,7 @@ namespace AspNetDemo.Services
             string content = null;
             try
             {
-                content = System.IO.File.ReadAllText($"ids/{fileName}");
+                content = File.ReadAllText($"ids/{fileName}");
             }
             catch (Exception) { }
             return content;
@@ -47,7 +48,9 @@ namespace AspNetDemo.Services
 
         private static void WriteToFile(string fileName, string content)
         {
-            System.IO.File.WriteAllText(fileName, content);
+            Directory.CreateDirectory("ids");
+
+            File.WriteAllText($"ids/{fileName}", content);
         }
     }
 }
