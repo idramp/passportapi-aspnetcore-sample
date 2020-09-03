@@ -27,12 +27,22 @@ namespace AspNetDemo.Services
             WriteToFile("emailCredDefId.txt", emailCredDefId);
         }
 
+        public static string GetRoleCredDefIdFromFile()
+        {
+            return GetFromFile("roleCredDefId.txt");
+        }
+
+        public static void StoreRoleCredDefIdToFile(string emailCredDefId)
+        {
+            WriteToFile("roleCredDefId.txt", emailCredDefId);
+        }
+
         private static string GetFromFile(string fileName)
         {
             string content = null;
             try
             {
-                content = System.IO.File.ReadAllText(fileName);
+                content = System.IO.File.ReadAllText($"ids/{fileName}");
             }
             catch (Exception) { }
             return content;
