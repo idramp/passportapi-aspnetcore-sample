@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AspNetDemo.Services
 {
@@ -12,7 +9,7 @@ namespace AspNetDemo.Services
             return GetFromFile("emailProofId.txt");
         }
 
-        public static void StoreEmailProofIdFromFile(string emailProofId)
+        public static void StoreEmailProofIdToFile(string emailProofId)
         {
             WriteToFile("emailProofId.txt", emailProofId);
         }

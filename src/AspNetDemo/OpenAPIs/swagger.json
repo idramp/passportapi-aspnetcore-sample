@@ -2,6 +2,11 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Passport API",
+    "description": "Issuer and validator APIs for Passport Cloud wallets.",
+    "contact": {
+      "name": "IdRamp",
+      "url": "https://www.idramp.com"
+    },
     "version": "v1"
   },
   "paths": {
@@ -141,7 +146,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "$ref": "#/components/schemas/IdModel"
                   }
                 }
               },
@@ -149,7 +154,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "$ref": "#/components/schemas/IdModel"
                   }
                 }
               },
@@ -157,7 +162,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "$ref": "#/components/schemas/IdModel"
                   }
                 }
               }
@@ -224,69 +229,24 @@
             "description": "Forbidden"
           },
           "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
-    "/api/v1/connection/accept": {
-      "post": {
-        "tags": [
-          "Connection"
-        ],
-        "summary": "Accept a connection offer",
-        "operationId": "AcceptConnection",
-        "requestBody": {
-          "description": "The connection config",
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AcceptConnectionModel"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AcceptConnectionModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AcceptConnectionModel"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AcceptConnectionModel"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Success",
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConnectionOfferModel"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConnectionOfferModel"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConnectionOfferModel"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               }
             }
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "400": {
-            "description": "Bad Request"
           }
         }
       }
@@ -340,17 +300,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               }
             }
@@ -407,17 +367,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               }
             }
@@ -500,7 +460,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "$ref": "#/components/schemas/IdModel"
                   }
                 }
               },
@@ -508,7 +468,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "$ref": "#/components/schemas/IdModel"
                   }
                 }
               },
@@ -516,7 +476,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "$ref": "#/components/schemas/IdModel"
                   }
                 }
               }
@@ -985,7 +945,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "$ref": "#/components/schemas/IdModel"
                   }
                 }
               },
@@ -993,7 +953,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "$ref": "#/components/schemas/IdModel"
                   }
                 }
               },
@@ -1001,7 +961,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "$ref": "#/components/schemas/IdModel"
                   }
                 }
               }
@@ -1062,17 +1022,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               }
             }
@@ -1080,6 +1040,82 @@
         }
       },
       "post": {
+        "tags": [
+          "Proof"
+        ],
+        "summary": "Update an existing proof config",
+        "operationId": "UpdateProofConfigPost",
+        "parameters": [
+          {
+            "name": "proofConfigId",
+            "in": "path",
+            "description": "The proof config id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The proof config id",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The updated proof fields",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProofModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProofModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProofModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProofModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
         "tags": [
           "Proof"
         ],
@@ -1138,17 +1174,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               }
             }
@@ -1161,7 +1197,7 @@
         "tags": [
           "Proof"
         ],
-        "summary": "Create a proof request based on a provided proof config id.\r\nIf the connectionId is not included, then it will be a connectionless proof and the QR contents will be returned.",
+        "summary": "Create a proof request based on a provided proof config (either by id of an existing config, or a provided configuration).\r\nIf the connectionId is not included, then it will be a connectionless proof and the QR contents will be returned.",
         "operationId": "CreateProof",
         "requestBody": {
           "description": "The request config",
@@ -1194,17 +1230,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProofRequestModel"
+                  "$ref": "#/components/schemas/CreateProofRequestResultModel"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProofRequestModel"
+                  "$ref": "#/components/schemas/CreateProofRequestResultModel"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProofRequestModel"
+                  "$ref": "#/components/schemas/CreateProofRequestResultModel"
                 }
               }
             }
@@ -1217,17 +1253,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               }
             }
@@ -1246,12 +1282,22 @@
           {
             "name": "challengeId",
             "in": "path",
-            "description": "",
+            "description": "The proof request identifier",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "The proof request identifier",
               "nullable": true
+            }
+          },
+          {
+            "name": "verify",
+            "in": "query",
+            "description": "If true, ensure the proof has been verified before returning the result",
+            "schema": {
+              "type": "boolean",
+              "description": "If true, ensure the proof has been verified before returning the result",
+              "default": false
             }
           }
         ],
@@ -1287,17 +1333,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               }
             }
@@ -1323,6 +1369,16 @@
               "description": "",
               "nullable": true
             }
+          },
+          {
+            "name": "verify",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "boolean",
+              "description": "",
+              "default": false
+            }
           }
         ],
         "responses": {
@@ -1357,17 +1413,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ErrorModel"
                 }
               }
             }
@@ -1512,10 +1568,12 @@
         "properties": {
           "connectionId": {
             "type": "string",
+            "description": "The connection which will be used to send the message.",
             "nullable": true
           },
           "content": {
             "type": "string",
+            "description": "The text content of the message.",
             "nullable": true
           }
         },
@@ -1526,32 +1584,50 @@
         "properties": {
           "id": {
             "type": "string",
+            "description": "The unique id of the basic message",
             "nullable": true
           },
           "content": {
             "type": "string",
+            "description": "The text content of the message.",
             "nullable": true
           },
           "sentTime": {
             "type": "string",
+            "description": "The time the message was sent.",
             "format": "date-time"
           },
           "receivedTime": {
             "type": "string",
+            "description": "The time the message was received.",
             "format": "date-time"
           }
         },
         "additionalProperties": false
+      },
+      "IdModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "An identifier",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "An identifer used to reference details"
       },
       "CreateConnectionModel": {
         "type": "object",
         "properties": {
           "aliasName": {
             "type": "string",
+            "description": "Optional. The name of the connection as it will appear in the Identity Wallet.",
             "nullable": true
           },
           "aliasIconUrl": {
             "type": "string",
+            "description": "Optional. An Internet routable URL to an icon to be displayed with the connection in the Identity Wallet.",
             "nullable": true
           }
         },
@@ -1562,19 +1638,22 @@
         "properties": {
           "id": {
             "type": "string",
+            "description": "The connection identifier",
             "nullable": true
           },
           "contents": {
             "type": "string",
+            "description": "The contents of the QR code",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A connection offer details"
       },
-      "AcceptConnectionModel": {
+      "ErrorModel": {
         "type": "object",
         "properties": {
-          "offer": {
+          "message": {
             "type": "string",
             "nullable": true
           }
@@ -1612,41 +1691,27 @@
         "additionalProperties": false
       },
       "CreateCredentialDefinitionModel": {
+        "required": [
+          "schemaId",
+          "tag"
+        ],
         "type": "object",
         "properties": {
           "schemaId": {
             "type": "string",
-            "nullable": true
+            "description": "Required. The schema Id the credential definition is based on. All credentials created with the resulting credential definition will have attributes which match this schema"
           },
           "tag": {
             "type": "string",
-            "nullable": true
+            "description": "Required. Appended to the credential definition id. Human readable. Unique per schema"
           },
           "enableRevocation": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Credentials created with the resulting credential definition can be revoked. Default \"false\""
           }
         },
-        "additionalProperties": false
-      },
-      "IdModel": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ErrorModel": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "Properties used to create a new credential definition"
       },
       "AttributeValue": {
         "type": "object",
@@ -1667,10 +1732,12 @@
         "properties": {
           "credentialDefinitionId": {
             "type": "string",
+            "description": "Required. The Id of the credential to issue.",
             "nullable": true
           },
           "connectionId": {
             "type": "string",
+            "description": "Optional. Send offer to this connection Id.",
             "nullable": true
           },
           "values": {
@@ -1678,32 +1745,40 @@
             "items": {
               "$ref": "#/components/schemas/AttributeValue"
             },
+            "description": "Required. The values to use with the issued credential.",
             "nullable": true
           },
           "credentialName": {
             "type": "string",
+            "description": "Optional. Name of the credential. If not set, it will use the schema name.",
             "nullable": true
           },
           "credentialIconUrl": {
             "type": "string",
+            "description": "Optional. An icon representing the credential. If not set, no icon will be set.",
             "nullable": true
           }
         },
         "additionalProperties": false
       },
       "CredentialOfferModel": {
+        "required": [
+          "id"
+        ],
         "type": "object",
         "properties": {
           "id": {
             "type": "string",
-            "nullable": true
+            "description": "The credential identifier"
           },
           "contents": {
             "type": "string",
+            "description": "The QR code contents",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A credential offer result"
       },
       "CredentialState": {
         "enum": [
@@ -1713,7 +1788,8 @@
           "Rejected",
           "Revoked"
         ],
-        "type": "string"
+        "type": "string",
+        "description": "Credential states"
       },
       "CredentialModel": {
         "type": "object",
@@ -1743,10 +1819,12 @@
         "type": "object",
         "properties": {
           "canIssue": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Indicates that this auth token has permission to create and issue credentials"
           },
           "canProof": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Indicates that this auth token has permission to create and request proofs"
           }
         },
         "additionalProperties": false
@@ -1756,52 +1834,90 @@
         "properties": {
           "schemaId": {
             "type": "string",
+            "description": "Require that the attribute is from a credential based on the schema with this SchemaId",
             "nullable": true
           },
           "schemaName": {
             "type": "string",
+            "description": "Require that the attribute is from a credential based on the schema with this Name",
             "nullable": true
           },
           "credDefId": {
             "type": "string",
+            "description": "Require that the attribute is from a credential with this credential definition Id",
             "nullable": true
           },
           "issuerDid": {
             "type": "string",
+            "description": "Require that the attribute is from a credential issued by a this Did",
             "nullable": true
           },
           "schemaIssuerDid": {
             "type": "string",
+            "description": "Require that the attribute is from a credential based on the schema created by this Did",
             "nullable": true
           },
           "schemaVersion": {
             "type": "string",
+            "description": "Require that the attribute is from a credential based on the schema with this Version",
             "nullable": true
           }
         },
         "additionalProperties": false
       },
+      "IntervalModel": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "Only allow credentials which are valid after this time",
+            "format": "date-time",
+            "nullable": true
+          },
+          "to": {
+            "type": "string",
+            "description": "Only allow credentials which are valid before this time",
+            "format": "date-time",
+            "nullable": true
+          },
+          "validWithin": {
+            "type": "string",
+            "description": "Only allow credentials which are valid between now and this time period into the past. Example: 00:05:00 would result in a PassportApi.Core.Models.IntervalModel.From value of (now - 5 minutes) and a PassportApi.Core.Models.IntervalModel.To value of (now)",
+            "format": "date-span",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a revocation interval"
+      },
       "ProofAttributeModel": {
+        "required": [
+          "id",
+          "name"
+        ],
         "type": "object",
         "properties": {
           "id": {
             "type": "string",
-            "nullable": true
+            "description": "Required. Identifier for the attribute, must be unique. Can be any value. Used to identify the value in the proof response."
           },
           "name": {
             "type": "string",
-            "nullable": true
+            "description": "Required. Name of the attribute to be requested. If adding a restriction on schema or credential definition, must match the schema's attribute name."
           },
           "schemaId": {
             "type": "string",
+            "description": "Optional. If set the credential must be created from this Schema.\r\nThis is a shortcut for the Restrictions property. If Restrictions is not null, this will be ignored.",
             "nullable": true
           },
           "schemaName": {
             "type": "string",
+            "description": "Optional. Require that the attribute is from a credential based on the schema with this Name.\r\nThis is a shortcut for the Restrictions property. If Restrictions is not null, this will be ignored.",
             "nullable": true
           },
           "credDefId": {
             "type": "string",
+            "description": "Optional. Require that the attribute is from a credential with this credential definition Id.\r\nThis is a shortcut for the Restrictions property. If Restrictions is not null, this will be ignored.",
             "nullable": true
           },
           "restrictions": {
@@ -1809,37 +1925,70 @@
             "items": {
               "$ref": "#/components/schemas/AttributeRestrictions"
             },
+            "description": "Optional. Used to restrict the credential used to fulfil the proof.\r\nIf not null, the PassportApi.Core.Models.Proof.ProofAttributeModel.SchemaId, PassportApi.Core.Models.Proof.ProofAttributeModel.SchemaName, and PassportApi.Core.Models.Proof.ProofAttributeModel.CredDefId will be ignored.",
             "nullable": true
+          },
+          "nonRevoked": {
+            "$ref": "#/components/schemas/IntervalModel"
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "An attribute being requested in a proof"
       },
-      "RevocationInterval": {
+      "PredicateType": {
+        "enum": [
+          "GreaterThan",
+          "GreaterThanOrEqualTo",
+          "LessThanOrEqualTo",
+          "LessThan"
+        ],
+        "type": "string"
+      },
+      "ProofPredicateModel": {
+        "required": [
+          "id",
+          "name",
+          "value"
+        ],
         "type": "object",
         "properties": {
-          "from": {
+          "id": {
             "type": "string",
-            "format": "date-time",
+            "description": "Required. Identifier for the attribute, must be unique. Can be any value. Used to identify the value in the proof response."
+          },
+          "name": {
+            "type": "string",
+            "description": "Required. Name of the attribute to be requested. If adding a restriction on schema or credential definition, must match the schema's attribute name."
+          },
+          "type": {
+            "$ref": "#/components/schemas/PredicateType"
+          },
+          "value": {
+            "type": "integer",
+            "description": "Required. The value to be compared to the attribute value. (eg. attribute value >= PassportApi.Core.Models.Proof.ProofPredicateModel.Value)",
+            "format": "int32"
+          },
+          "restrictions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeRestrictions"
+            },
+            "description": "Optional. Used to restrict the credential used to fulfil the proof.",
             "nullable": true
           },
-          "to": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "validWithin": {
-            "type": "string",
-            "format": "date-span",
-            "nullable": true
+          "nonRevoked": {
+            "$ref": "#/components/schemas/IntervalModel"
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "An attribute restriction in a proof"
       },
       "ProofModel": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
+            "description": "The name of the proof as it will appear in the identity wallet. Defaults to \"Request\"",
             "nullable": true
           },
           "attributes": {
@@ -1847,41 +1996,60 @@
             "items": {
               "$ref": "#/components/schemas/ProofAttributeModel"
             },
+            "description": "List of attributes to request",
+            "nullable": true
+          },
+          "predicates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProofPredicateModel"
+            },
+            "description": "List of predicates to request",
             "nullable": true
           },
           "nonRevoked": {
-            "$ref": "#/components/schemas/RevocationInterval"
+            "$ref": "#/components/schemas/IntervalModel"
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A proof configuration"
       },
       "CreateProofRequestModel": {
         "type": "object",
         "properties": {
           "proofConfigId": {
             "type": "string",
+            "description": "Either this field or PassportApi.Core.Models.Proof.CreateProofRequestModel.ProofConfig is required. If both are valid, PassportApi.Core.Models.Proof.CreateProofRequestModel.ProofConfig will take priority. The identifier of the previously created proof configuration.",
             "nullable": true
           },
           "connectionId": {
             "type": "string",
+            "description": "Optional. If included, the proof request will be sent via this connection, and not returned via this API.",
             "nullable": true
+          },
+          "proofConfig": {
+            "$ref": "#/components/schemas/ProofModel"
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "Proof request creation model"
       },
-      "ProofRequestModel": {
+      "CreateProofRequestResultModel": {
         "type": "object",
         "properties": {
           "id": {
             "type": "string",
+            "description": "The Proof Request Id",
             "nullable": true
           },
           "requestUrl": {
             "type": "string",
+            "description": "The QR code contents",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "The results of proof request creation"
       },
       "ProofState": {
         "enum": [
@@ -1890,7 +2058,8 @@
           "Requested",
           "Invalid"
         ],
-        "type": "string"
+        "type": "string",
+        "description": "The state of the proof request"
       },
       "RequestedAttributeValue": {
         "type": "object",
@@ -1910,11 +2079,21 @@
         },
         "additionalProperties": false
       },
+      "VerifiedState": {
+        "enum": [
+          "NotChecked",
+          "Verified",
+          "NotVerified"
+        ],
+        "type": "string",
+        "description": "The verification state of the proof response"
+      },
       "ProofStateModel": {
         "type": "object",
         "properties": {
           "id": {
             "type": "string",
+            "description": "The proof request identifier",
             "nullable": true
           },
           "state": {
@@ -1925,6 +2104,15 @@
             "items": {
               "$ref": "#/components/schemas/ProofAttributeModel"
             },
+            "description": "List of attributes requested to be proven.",
+            "nullable": true
+          },
+          "predicateAttributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProofPredicateModel"
+            },
+            "description": "List of predicated attributes to be proven.",
             "nullable": true
           },
           "attributeValues": {
@@ -1932,10 +2120,15 @@
             "items": {
               "$ref": "#/components/schemas/RequestedAttributeValue"
             },
+            "description": "List of attributes returned by the prover.",
             "nullable": true
+          },
+          "verifiedState": {
+            "$ref": "#/components/schemas/VerifiedState"
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "The state of the proof request"
       },
       "SchemaModel": {
         "type": "object",

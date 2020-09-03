@@ -1,9 +1,7 @@
-﻿using AspNetDemo.Models;
+﻿using System;
+using System.Net.Http;
+using AspNetDemo.Models;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AspNetDemo.Extensions
 {
@@ -21,8 +19,8 @@ namespace AspNetDemo.Extensions
 
             services.AddSingleton<PassportApi.swaggerClient>((IServiceProvider services) =>
             {
-                System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
-                client.DefaultRequestHeaders.Authorization = 
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization =
                     new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer",
                         config.BearerToken
                     );

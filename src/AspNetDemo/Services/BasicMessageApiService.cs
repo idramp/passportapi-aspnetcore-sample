@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using PassportApi;
 
@@ -8,9 +6,9 @@ namespace AspNetDemo.Services
 {
     public class BasicMessageApiService
     {
-        private readonly PassportApi.swaggerClient _client;
-        public BasicMessageApiService(
-            PassportApi.swaggerClient client)
+        // TODO jmason : Figure out how to control the name of this client by passing params to the nswag code generation toolchain
+        private readonly swaggerClient _client;
+        public BasicMessageApiService(swaggerClient client)
         {
             _client = client;
         }

@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AspNetDemo.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PassportApi;
 
 namespace AspNetDemo.Pages.Passport.Revocable
 {
-    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Models.AuthConstants.CookieScheme)]
-    public class RevokableOfferModel : PageModel
+    [Authorize(AuthenticationSchemes = Models.AuthConstants.CookieScheme)]
+    public class RevocableOfferModel : PageModel
     {
         private readonly RevocableCredentialApiService _passportService;
 
-        public RevokableOfferModel(RevocableCredentialApiService passportService)
+        public RevocableOfferModel(RevocableCredentialApiService passportService)
         {
             _passportService = passportService;
         }
 
-        public PassportApi.CredentialOfferModel Offer { get; set; }
+        public CredentialOfferModel Offer { get; set; }
 
         public async Task<IActionResult> OnGet()
         {
@@ -32,10 +31,9 @@ namespace AspNetDemo.Pages.Passport.Revocable
 
         public async Task<IActionResult> OnGetStatusAsync(string id)
         {
-            PassportApi.CredentialState state = await _passportService.GetCredentialState(id);
+            CredentialState state = await _passportService.GetCredentialState(id);
 
-            if (state == PassportApi.CredentialState.Issued ||
-                state == PassportApi.CredentialState.Rejected)
+            if (state == CredentialState.Issued || state == CredentialState.Rejected)
                 return new JsonResult(true);
             else
                 return new JsonResult(false);
