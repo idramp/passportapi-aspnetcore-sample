@@ -16,7 +16,7 @@
 {
     <script src="~/js/embed.js"></script>
     <script type="text/javascript">
-        var checkDoneUrl = '@Html.Raw(Url.Page("./ConnectionOffer", "Status", new { proofId = Model.Offer.Id }, "https"))';
+        var checkDoneUrl = '@Html.Raw(Url.Page("./ConnectionOffer", "Status", new { credentialId = Model.Offer.Id }, "https"))';
         var redirect = '@Html.Raw(Url.Page("./Index"))';
         justWatch(checkDoneUrl, redirect);
     </script>
