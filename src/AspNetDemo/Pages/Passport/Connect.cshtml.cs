@@ -18,7 +18,6 @@ namespace AspNetDemo.Pages.Passport
             _passportService = passportService;
         }
 
-        // TODO jmason : This doesn't appear to ever actually be used. It's only displayed in a partial view that doesn't exist, I think.
         [TempData]
         public string Message { get; set; }
 

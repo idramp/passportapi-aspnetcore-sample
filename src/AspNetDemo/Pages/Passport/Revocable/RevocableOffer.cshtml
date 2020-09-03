@@ -17,7 +17,7 @@
     <script src="~/js/embed.js"></script>
     <script type="text/javascript">
         var checkDoneUrl = '@Html.Raw(Url.Page("./RevocableOffer", "Status", new { id = Model.Offer.Id }, "https"))';
-        var redirect = '@Html.Raw(Url.Page("../Index"))'; // TODO jmason : do a continue-type thing like the /Connect page?
+        var redirect = '@Html.Raw(Url.Page("../Index"))'; // Item #441 : do a continue-type thing like the /Connect page?
         justWatch(checkDoneUrl, redirect);
     </script>
 }
