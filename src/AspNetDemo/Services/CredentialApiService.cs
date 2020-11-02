@@ -18,7 +18,7 @@ namespace AspNetDemo.Services
             return _client.GetCredentialStatusAsync(id);
         }
 
-        public async Task<CredentialOfferModel> IssueEmailCredential(string connectionId, string emailAddress)
+        public async Task<CredentialOfferModel> IssueEmailCredentialAsync(string connectionId, string emailAddress)
         {
             string emailCredDefId = await GetEmailCredDefId();
             return await _client.CreateCredentialAsync(new CreateCredentialOfferModel
