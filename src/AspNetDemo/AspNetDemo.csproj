@@ -6,6 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Passport\ConnectionlessCredential.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Passport\ConnectionlessCredential.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <OpenApiReference Include="OpenAPIs\swagger.json" Namespace="PassportApi">
       <CodeGenerator>NSwagCSharp</CodeGenerator>
       <SourceUri>https://passport-api-test.azurewebsites.net/swagger/v1/swagger.json</SourceUri>
