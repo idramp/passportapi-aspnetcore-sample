@@ -26,7 +26,7 @@ namespace AspNetDemo.Pages.Passport
             if (connectionId == null)
                 return RedirectToPage("./Connect", new { returnUrl = Url.Page("./ConnectionOffer") });
 
-            Offer = await _passportService.IssueEmailCredential(connectionId, "demo@example.org");
+            Offer = await _passportService.IssueEmailCredentialAsync(connectionId, "demo@example.org");
             return Page();
         }
 
