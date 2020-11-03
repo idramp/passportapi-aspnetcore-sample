@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace AspNetDemo.Services
 {
@@ -12,7 +10,7 @@ namespace AspNetDemo.Services
             return GetFromFile("emailProofId.txt");
         }
 
-        public static void StoreEmailProofIdFromFile(string emailProofId)
+        public static void StoreEmailProofIdToFile(string emailProofId)
         {
             WriteToFile("emailProofId.txt", emailProofId);
         }
@@ -27,12 +25,22 @@ namespace AspNetDemo.Services
             WriteToFile("emailCredDefId.txt", emailCredDefId);
         }
 
+        public static string GetRoleCredDefIdFromFile()
+        {
+            return GetFromFile("roleCredDefId.txt");
+        }
+
+        public static void StoreRoleCredDefIdToFile(string emailCredDefId)
+        {
+            WriteToFile("roleCredDefId.txt", emailCredDefId);
+        }
+
         private static string GetFromFile(string fileName)
         {
             string content = null;
             try
             {
-                content = System.IO.File.ReadAllText(fileName);
+                content = File.ReadAllText($"ids/{fileName}");
             }
             catch (Exception) { }
             return content;
@@ -40,7 +48,9 @@ namespace AspNetDemo.Services
 
         private static void WriteToFile(string fileName, string content)
         {
-            System.IO.File.WriteAllText(fileName, content);
+            Directory.CreateDirectory("ids");
+
+            File.WriteAllText($"ids/{fileName}", content);
         }
     }
 }

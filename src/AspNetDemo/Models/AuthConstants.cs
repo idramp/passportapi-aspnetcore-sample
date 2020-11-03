@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿
 namespace AspNetDemo.Models
 {
     public static class AuthConstants
@@ -10,5 +6,7 @@ namespace AspNetDemo.Models
         public const string CookieScheme = "ConnectionCookie";
 
         public const string Claim_ConnectionId = "ConnectionId";
+
+        public const string Claim_RevocableCredentialId = "RevocableCredentialId";
     }
 }

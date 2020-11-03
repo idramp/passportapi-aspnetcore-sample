@@ -1,37 +1,37 @@
 ﻿@page
 @model AspNetDemo.Pages.Passport.ConnectModel
-    <div class="container">
-        <div class="row">
-            <h3>Establish Connection</h3>
-        </div>
-        <div class="row">
+<div class="container">
+    <div class="row">
+        <h3>Establish Connection</h3>
+    </div>
+    <div class="row">
+        @if (Model.Connection != null)
+        {
             <div class="col-md-6">
+                <div id="qrCode"></div>
 
-                @if (Model.Connection != null)
-                {
-                    <div id="qrCode"></div>
-
-                    <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs@0.0.2/qrcode.min.js"></script>
-                    <script src="~/js/embed.js"></script>
-                    <script type="text/javascript">
-                        var checkDoneUrl = '@Html.Raw(Url.Page("./Connect", "Status", new { id = Model.Connection.Id }, "https"))';
-                        var contents = '@Html.Raw(Model.Connection.Contents)';
-                        var redirect = '@Html.Raw(Url.Page("./Connect", "Continue", new { id = Model.Connection.Id }, "https"))';
-                        embedQR('qrCode', contents, checkDoneUrl, redirect);
-                    </script>
-
-                }
-                else
-                {
-                    <partial name="_Alert" model="Model.Message" />
-                    <a asp-page="./Connect" class="btn btn-secondary">Try again</a>
-                }
-
+                <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs@0.0.2/qrcode.min.js"></script>
+                <script src="~/js/embed.js"></script>
+                <script type="text/javascript">
+                    var checkDoneUrl = '@Html.Raw(Url.Page("./Connect", "Status", new { id = Model.Connection.Id }, "https"))';
+                    var contents = '@Html.Raw(Model.Connection.Contents)';
+                    var redirect = '@Html.Raw(Url.Page("./Connect", "Continue", new { id = Model.Connection.Id }, "https"))';
+                    embedQR('qrCode', contents, checkDoneUrl, redirect);
+                </script>
             </div>
+
             <div class="col-md-6">
                 <p>
                     Scanning this QR code with your identity wallet will create a connection between you and the Passport API wallet.
                 </p>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="col-md-6">
+                <partial name="_Alert" model="Model.Message" />
+                <a asp-page="./Connect" class="btn btn-secondary">Try again</a>
+            </div>
+        }
     </div>
+</div>

@@ -26,13 +26,13 @@ namespace AspNetDemo.Pages.Passport
             if (connectionId == null)
                 return RedirectToPage("./Connect", new { returnUrl = Url.Page("./ConnectionOffer") });
 
-            Offer = await _passportService.IssueEmailCredential(connectionId, "demo@example.org");
+            Offer = await _passportService.IssueEmailCredentialAsync(connectionId, "demo@example.org");
             return Page();
         }
 
-        public async Task<IActionResult> OnGetStatusAsync(string id)
+        public async Task<IActionResult> OnGetStatusAsync(string credentialId)
         {
-            PassportApi.CredentialState state = await _passportService.GetCredentialState(id);
+            PassportApi.CredentialState state = await _passportService.GetCredentialState(credentialId);
 
             if (state == PassportApi.CredentialState.Issued ||
                 state == PassportApi.CredentialState.Rejected)

@@ -1,0 +1,60 @@
+﻿@page
+@model AspNetDemo.Pages.Passport.BasicMessageModel
+@{
+    ViewData["Title"] = "BasicMessage";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="container-fluid">
+            <h3>Basic Message</h3>
+            <p>
+                Use the form below to send a message to the identity wallet via the connection.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Send Message</h5>
+                    <form method="post">
+                        <div class="form-group">
+                            <label asp-for="BasicMessage">Message</label>
+                            <input type="text" class="form-control" asp-for="BasicMessage" aria-describedby="basicMessageHelp" placeholder="Enter message">
+                            <small id="basicMessageHelp" class="form-text text-muted">This message may (assuming it is supported) display on the identity wallet on the other end of this connection.</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container-fluid">
+            <h4>Inbound Messages</h4>
+            @if (Model.Messages != null)
+            {
+                <table class="table">
+                    <tr>
+                        <th>Message</th>
+                        <th>Sent</th>
+                        <th>Received</th>
+                    </tr>
+                    @foreach (var message in Model.Messages)
+                    {
+                        <tr>
+                            <td>@message.Content</td>
+                            <td>@message.SentTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                            <td>@message.ReceivedTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>No inbound messages from this connection.</p>
+            }
+        </div>
+    </div>
+</div>

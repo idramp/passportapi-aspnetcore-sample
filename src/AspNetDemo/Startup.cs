@@ -1,14 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AspNetDemo.Extensions;
+using AspNetDemo.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using AspNetDemo.Extensions;
 
 namespace AspNetDemo
 {
@@ -25,13 +21,17 @@ namespace AspNetDemo
         public void ConfigureServices(IServiceCollection services)
         {
             string bearerToken = Configuration.GetValue<string>("passportApiBearerToken");
+            string apiEndpoint = Configuration.GetValue<string>("apiEndpoint");
             services.AddPassportAPI(options =>
             {
                 options.BearerToken = bearerToken;
+                options.ApiEndpointUrl = apiEndpoint ?? options.ApiEndpointUrl;
             });
-            services.AddSingleton<Services.ConnectionApiService>();
-            services.AddSingleton<Services.ProofApiService>();
-            services.AddSingleton<Services.CredentialApiService>();
+            services.AddSingleton<ConnectionApiService>();
+            services.AddSingleton<ProofApiService>();
+            services.AddSingleton<CredentialApiService>();
+            services.AddSingleton<BasicMessageApiService>();
+            services.AddSingleton<RevocableCredentialApiService>();
 
             services.AddAuthentication()
                 // create a cookie to store the Mobile Identity Wallet's connection id

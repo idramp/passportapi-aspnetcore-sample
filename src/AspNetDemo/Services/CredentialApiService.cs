@@ -1,16 +1,14 @@
-﻿using PassportApi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
+using PassportApi;
 
 namespace AspNetDemo.Services
 {
     public class CredentialApiService
     {
-        private readonly PassportApi.swaggerClient _client;
-        public CredentialApiService(
-            PassportApi.swaggerClient client)
+        private readonly swaggerClient _client;
+
+        public CredentialApiService(swaggerClient client)
         {
             _client = client;
         }
@@ -20,7 +18,7 @@ namespace AspNetDemo.Services
             return _client.GetCredentialStatusAsync(id);
         }
 
-        public async Task<CredentialOfferModel> IssueEmailCredential(string connectionId, string emailAddress)
+        public async Task<CredentialOfferModel> IssueEmailCredentialAsync(string connectionId, string emailAddress)
         {
             string emailCredDefId = await GetEmailCredDefId();
             return await _client.CreateCredentialAsync(new CreateCredentialOfferModel
@@ -28,12 +26,12 @@ namespace AspNetDemo.Services
                 ConnectionId = connectionId,
                 CredentialDefinitionId = emailCredDefId,
                 CredentialName = "Email",
-                Values = new AttributeValue[] { 
+                Values = new AttributeValue[] {
                     new AttributeValue ()
                     {
                         Name = "Email",
                         Value = emailAddress
-                    } 
+                    }
                 }
             });
         }
@@ -58,7 +56,7 @@ namespace AspNetDemo.Services
             IdModel result = await _client.CreateCredentialDefinitionAsync(new CreateCredentialDefinitionModel
             {
                 SchemaId = "WxM17SNiPaD8mKL5V5ertw:2:Verified Email:1.0",
-                Tag = "email-"+ DateTime.UtcNow.ToString("yyyyMMddHHmmss")
+                Tag = "email-" + DateTime.UtcNow.ToString("yyyyMMddHHmmss")
             });
             return result.Id;
         }
