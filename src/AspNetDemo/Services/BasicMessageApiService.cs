@@ -1,14 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using PassportApi;
+using IdRamp.Passport;
+
 
 namespace AspNetDemo.Services
 {
+    /// <summary>
+    /// Some wrapper code to help in interacting with the Basic Message-related methods of the Passport API.
+    /// 
+    /// Allows for sending and receiving a simple text Basic Message.
+    /// </summary>
     public class BasicMessageApiService
     {
-        // TODO jmason : Figure out how to control the name of this client by passing params to the nswag code generation toolchain
-        private readonly swaggerClient _client;
-        public BasicMessageApiService(swaggerClient client)
+        private readonly PassportApiClient _client;
+
+        public BasicMessageApiService(PassportApiClient client)
         {
             _client = client;
         }

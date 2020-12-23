@@ -1,13 +1,15 @@
 ﻿using System.Threading.Tasks;
+using AspNetDemo.Models;
 using AspNetDemo.Services;
+using IdRamp.Passport;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using PassportApi;
+
 
 namespace AspNetDemo.Pages.Passport
 {
-    [Authorize(AuthenticationSchemes = Models.AuthConstants.CookieScheme)]
+    [Authorize(AuthenticationSchemes = AuthConstants.CookieScheme)]
     public class ConnectionProofModel : PageModel
     {
         private readonly ProofApiService _passportService;
