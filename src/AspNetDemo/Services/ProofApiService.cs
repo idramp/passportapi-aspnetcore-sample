@@ -5,6 +5,12 @@ using IdRamp.Passport;
 
 namespace AspNetDemo.Services
 {
+    /// <summary>
+    /// Some wrapper code to help in interacting with the Proof-related methods of the Passport API.
+    /// 
+    /// The email proof is restricted by Schema ID, and this restriction is currently hard-coded, but could be retrieved from configuration
+    /// instead in the future.
+    /// </summary>
     public class ProofApiService
     {
         private readonly PassportApiClient _client;

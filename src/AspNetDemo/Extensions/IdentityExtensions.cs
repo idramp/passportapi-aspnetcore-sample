@@ -7,9 +7,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace AspNetDemo
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public static class IdentityExtensions
     {
         public static string GetConnectionId(this ClaimsPrincipal claimsPrincipal)

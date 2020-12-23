@@ -5,6 +5,11 @@ using IdRamp.Passport;
 
 namespace AspNetDemo.Services
 {
+    /// <summary>
+    /// Some wrapper code to help in interacting with the Basic Message-related methods of the Passport API.
+    /// 
+    /// Allows for sending and receiving a simple text Basic Message.
+    /// </summary>
     public class BasicMessageApiService
     {
         private readonly PassportApiClient _client;

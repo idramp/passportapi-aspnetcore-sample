@@ -5,6 +5,9 @@ using IdRamp.Passport;
 
 namespace AspNetDemo.Services
 {
+    /// <summary>
+    /// Some wrapper code to help in interacting with the Credential-related methods of the Passport API when revocability is desired.
+    /// </summary>
     public class RevocableCredentialApiService
     {
         private readonly PassportApiClient _client;
