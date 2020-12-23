@@ -1,14 +1,23 @@
 ﻿using System;
 using System.Threading.Tasks;
-using PassportApi;
+using IdRamp.Passport;
+
 
 namespace AspNetDemo.Services
 {
+    /// <summary>
+    /// Some wrapper code to help in interacting with the Credential-related methods of the Passport API.
+    /// 
+    /// Currently the "Email" credential is created with a hard-coded schema ID, but that could be changed to be retrieved from
+    /// configuration. Be default, the tag is set to "email-" appended with a timestampe. The credential definition ID will be
+    /// cached automatically by the <see cref="FileStorage"/> helpers, as creating one can take time since writing to the ledger
+    /// is necessary.
+    /// </summary>
     public class CredentialApiService
     {
-        private readonly swaggerClient _client;
+        private readonly PassportApiClient _client;
 
-        public CredentialApiService(swaggerClient client)
+        public CredentialApiService(PassportApiClient client)
         {
             _client = client;
         }

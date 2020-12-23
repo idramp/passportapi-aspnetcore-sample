@@ -1,8 +1,13 @@
 ﻿using System;
 using System.IO;
 
+
 namespace AspNetDemo.Services
 {
+    /// <summary>
+    /// Some helpers for caching and retrieving some IDs that we'd rather not generate fresh every time. This utility simply
+    /// stores IDs in files in the <code>/ids</code> directory.
+    /// </summary>
     public static class FileStorage
     {
         public static string GetEmailProofIdFromFile()
