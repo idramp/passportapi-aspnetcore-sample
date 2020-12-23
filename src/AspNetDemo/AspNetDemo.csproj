@@ -8,7 +8,7 @@
   <ItemGroup>
     <OpenApiReference Include="OpenAPIs\swagger.json" Namespace="IdRamp.Passport">
       <CodeGenerator>NSwagCSharp</CodeGenerator>
-      <SourceUri>https://passport-api-test.azurewebsites.net/swagger/v1/swagger.json</SourceUri>
+      <SourceUri>https://passport-api.idramp.com/swagger/v1/swagger.json</SourceUri>
       <ClassName>PassportApiClient</ClassName>
       <OutputPath>PassportApiClient.cs</OutputPath>
     </OpenApiReference>

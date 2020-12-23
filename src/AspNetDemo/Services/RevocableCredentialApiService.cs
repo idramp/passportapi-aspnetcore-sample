@@ -65,9 +65,9 @@ namespace AspNetDemo.Services
             IdModel result = await _client.CreateCredentialDefinitionAsync(new CreateCredentialDefinitionModel
             {
                 SchemaId = "ATfEGD9UJ2pzunx9LmoE4f:2:RC:1.0",
-                Tag = "role-" + DateTime.UtcNow.ToString("yyyyMMddHHmmss"),
-                EnableRevocation = true
+                Tag = "role-" + DateTime.UtcNow.ToString("yyyyMMddHHmmss") // TODO : When ready, EnableRevocation = true
             });
+
             return result.Id;
         }
     }
