@@ -1,13 +1,14 @@
 ﻿using System.Threading.Tasks;
-using PassportApi;
+using IdRamp.Passport;
+
 
 namespace AspNetDemo.Services
 {
     public class ConnectionApiService
     {
-        private readonly swaggerClient _client;
+        private readonly PassportApiClient _client;
 
-        public ConnectionApiService(swaggerClient client)
+        public ConnectionApiService(PassportApiClient client)
         {
             _client = client;
         }

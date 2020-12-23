@@ -1,28 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using PassportApi;
+using IdRamp.Passport;
+
 
 namespace AspNetDemo.Services
 {
     public class ProofApiService
     {
-        private readonly swaggerClient _client;
+        private readonly PassportApiClient _client;
 
-        public ProofApiService(swaggerClient client)
+        public ProofApiService(PassportApiClient client)
         {
             _client = client;
         }
 
-        // TODO jmason : deal with the new verify param
         public Task<ProofStateModel> GetProof(string proofId)
         {
-            return _client.GetProofAsync(proofId, verify: true);
+            return _client.GetProofAsync(proofId, verify: true); // TODO : verify param switches to VerifyOption enum
         }
 
         public Task<ProofState> GetProofState(string proofId)
         {
-            return _client.GetProofStatusAsync(proofId, verify: true);
+            return _client.GetProofStatusAsync(proofId);
         }
 
         public async Task<CreateProofRequestResultModel> GetEmailProof(string connectionId = null)

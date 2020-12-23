@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 using AspNetDemo.Models;
 using AspNetDemo.Services;
+using IdRamp.Passport;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using PassportApi;
 
 
 namespace AspNetDemo.Pages.Passport
@@ -27,7 +27,7 @@ namespace AspNetDemo.Pages.Passport
         [BindProperty(Name = "returnUrl", SupportsGet = true)]
         public string ReturnUrl { get; set; }
 
-        public PassportApi.ConnectionOfferModel Connection { get; private set; }
+        public IdRamp.Passport.ConnectionOfferModel Connection { get; private set; }
 
         public async Task<IActionResult> OnGet()
         {
@@ -57,7 +57,7 @@ namespace AspNetDemo.Pages.Passport
 
         private async Task<IActionResult> CreateNewConnection()
         {
-            PassportApi.ConnectionOfferModel result = await _passportService.CreateConnection();
+            IdRamp.Passport.ConnectionOfferModel result = await _passportService.CreateConnection();
             if (result != null)
             {
                 Connection = result;
