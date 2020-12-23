@@ -5,9 +5,9 @@ namespace AspNetDemo.Services
 {
     public class ConnectionApiService
     {
-        private readonly PassportApi.swaggerClient _client;
-        public ConnectionApiService(
-            PassportApi.swaggerClient client)
+        private readonly swaggerClient _client;
+
+        public ConnectionApiService(swaggerClient client)
         {
             _client = client;
         }

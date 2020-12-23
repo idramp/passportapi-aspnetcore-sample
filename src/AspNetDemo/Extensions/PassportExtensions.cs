@@ -2,6 +2,8 @@
 using System.Net.Http;
 using AspNetDemo.Models;
 using Microsoft.Extensions.DependencyInjection;
+using PassportApi;
+
 
 namespace AspNetDemo.Extensions
 {
@@ -17,7 +19,7 @@ namespace AspNetDemo.Extensions
             if (string.IsNullOrEmpty(config.BearerToken))
                 throw new ArgumentNullException(nameof(ApiConfig.BearerToken), "The PassportAPI bearer token is required.");
 
-            services.AddSingleton<PassportApi.swaggerClient>((IServiceProvider services) =>
+            services.AddSingleton<swaggerClient>((IServiceProvider services) =>
             {
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Authorization =

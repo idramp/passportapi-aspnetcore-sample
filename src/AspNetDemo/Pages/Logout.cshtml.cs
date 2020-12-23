@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
+using AspNetDemo.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+
 
 namespace AspNetDemo.Pages
 {
@@ -7,7 +9,7 @@ namespace AspNetDemo.Pages
     {
         public async Task OnGet()
         {
-            await HttpContext.Logout(Models.AuthConstants.CookieScheme);
+            await HttpContext.Logout(AuthConstants.CookieScheme);
         }
     }
 }

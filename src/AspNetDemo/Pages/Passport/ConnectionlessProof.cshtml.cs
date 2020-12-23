@@ -1,14 +1,16 @@
 ﻿using System.Threading.Tasks;
+using AspNetDemo.Models;
 using AspNetDemo.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PassportApi;
 
+
 namespace AspNetDemo.Pages.Passport
 {
     [AllowAnonymous]
-    [Authorize(AuthenticationSchemes = Models.AuthConstants.CookieScheme)]
+    [Authorize(AuthenticationSchemes = AuthConstants.CookieScheme)]
     public class ConnectionlessProofModel : PageModel
     {
         private readonly ProofApiService _passportService;
@@ -30,7 +32,7 @@ namespace AspNetDemo.Pages.Passport
         {
             ProofState state = await _passportService.GetProofState(proofId);
 
-            if (state == PassportApi.ProofState.Accepted)
+            if (state == ProofState.Accepted)
                 return new JsonResult(true);
             else
                 return new JsonResult(false);

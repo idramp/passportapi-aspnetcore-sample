@@ -1,13 +1,15 @@
 ﻿using System.Threading.Tasks;
+using AspNetDemo.Models;
 using AspNetDemo.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PassportApi;
 
+
 namespace AspNetDemo.Pages.Passport.Revocable
 {
-    [Authorize(AuthenticationSchemes = Models.AuthConstants.CookieScheme)]
+    [Authorize(AuthenticationSchemes = AuthConstants.CookieScheme)]
     public class RevocableOfferModel : PageModel
     {
         private readonly RevocableCredentialApiService _passportService;

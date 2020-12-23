@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using AspNetDemo.Models;
 using AspNetDemo.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +10,7 @@ using PassportApi;
 namespace AspNetDemo.Pages.Passport
 {
     [AllowAnonymous]
-    [Authorize(AuthenticationSchemes = Models.AuthConstants.CookieScheme)]
+    [Authorize(AuthenticationSchemes = AuthConstants.CookieScheme)]
     public class ConnectionlessOfferModel : PageModel
     {
         private readonly CredentialApiService _credService;
