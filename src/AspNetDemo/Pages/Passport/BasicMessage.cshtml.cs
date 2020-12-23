@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AspNetDemo.Models;
 using AspNetDemo.Services;
+using IdRamp.Passport;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using PassportApi;
+
 
 namespace AspNetDemo.Pages.Passport
 {
-    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Models.AuthConstants.CookieScheme)]
+    [Authorize(AuthenticationSchemes = AuthConstants.CookieScheme)]
     public class BasicMessageModel : PageModel
     {
-        private readonly Services.BasicMessageApiService _passportService;
+        private readonly BasicMessageApiService _passportService;
 
         public BasicMessageModel(
             BasicMessageApiService passportService)
@@ -33,10 +33,13 @@ namespace AspNetDemo.Pages.Passport
 
             try
             {
-                // A HTTP 204 response is causing an exception to be thrown in the generated swagger client.
+                // An HTTP 204 NoContent response can cause an exception if there are no messages waiting.
                 Messages = await _passportService.GetMessages(connectionId);
             }
-            catch { }
+            catch 
+            {
+            }
+
             return Page();
         }
         public async Task<IActionResult> OnPost()

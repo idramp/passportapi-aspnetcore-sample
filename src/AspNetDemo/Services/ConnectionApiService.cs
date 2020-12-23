@@ -1,13 +1,19 @@
 ﻿using System.Threading.Tasks;
-using PassportApi;
+using IdRamp.Passport;
+
 
 namespace AspNetDemo.Services
 {
+    /// <summary>
+    /// Some wrapper code to help in interacting with the Connection-related methods of the Passport API.
+    /// 
+    /// By default, this sample app sets "Demo" as the connection name.
+    /// </summary>
     public class ConnectionApiService
     {
-        private readonly PassportApi.swaggerClient _client;
-        public ConnectionApiService(
-            PassportApi.swaggerClient client)
+        private readonly PassportApiClient _client;
+
+        public ConnectionApiService(PassportApiClient client)
         {
             _client = client;
         }

@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Threading.Tasks;
-using PassportApi;
+using IdRamp.Passport;
+
 
 namespace AspNetDemo.Services
 {
+    /// <summary>
+    /// Some wrapper code to help in interacting with the Credential-related methods of the Passport API when revocability is desired.
+    /// </summary>
     public class RevocableCredentialApiService
     {
-        private readonly swaggerClient _client;
-        public RevocableCredentialApiService(swaggerClient client)
+        private readonly PassportApiClient _client;
+
+        public RevocableCredentialApiService(PassportApiClient client)
         {
             _client = client;
         }
@@ -60,9 +65,9 @@ namespace AspNetDemo.Services
             IdModel result = await _client.CreateCredentialDefinitionAsync(new CreateCredentialDefinitionModel
             {
                 SchemaId = "ATfEGD9UJ2pzunx9LmoE4f:2:RC:1.0",
-                Tag = "role-" + DateTime.UtcNow.ToString("yyyyMMddHHmmss"),
-                EnableRevocation = true
+                Tag = "role-" + DateTime.UtcNow.ToString("yyyyMMddHHmmss") // TODO : When ready, EnableRevocation = true
             });
+
             return result.Id;
         }
     }

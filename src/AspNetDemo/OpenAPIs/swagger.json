@@ -1362,22 +1362,12 @@
           {
             "name": "challengeId",
             "in": "path",
-            "description": "",
+            "description": "The proof request identifier",
             "required": true,
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "The proof request identifier",
               "nullable": true
-            }
-          },
-          {
-            "name": "verify",
-            "in": "query",
-            "description": "",
-            "schema": {
-              "type": "boolean",
-              "description": "",
-              "default": false
             }
           }
         ],
@@ -1811,10 +1801,6 @@
           "tag": {
             "type": "string",
             "description": "Required. Appended to the credential definition id. Human readable. Unique per schema"
-          },
-          "enableRevocation": {
-            "type": "boolean",
-            "description": "Credentials created with the resulting credential definition can be revoked. Default \"false\""
           }
         },
         "additionalProperties": false,
@@ -1825,14 +1811,17 @@
         "properties": {
           "name": {
             "type": "string",
+            "description": "Attribute name (must match attribute name in schema)",
             "nullable": true
           },
           "value": {
             "type": "string",
+            "description": "Attribute value",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "The value of an attribute in a credential."
       },
       "CreateCredentialOfferModel": {
         "required": [
@@ -2052,7 +2041,8 @@
           "LessThanOrEqualTo",
           "LessThan"
         ],
-        "type": "string"
+        "type": "string",
+        "description": "How to compare the attribute value to the predicated value"
       },
       "ProofPredicateModel": {
         "required": [
@@ -2169,34 +2159,38 @@
           "Invalid"
         ],
         "type": "string",
-        "description": "The state of the proof request"
+        "description": "The state of the proof request\r\nRequested - The proof request has been generated\r\nAccepted - The proof response has been returned from the client\r\nRejected - The client decided not to fulfill the proof"
       },
       "RequestedAttributeValue": {
         "type": "object",
         "properties": {
           "attributeId": {
             "type": "string",
+            "description": "The requested attribute's assigned identifier",
             "nullable": true
           },
           "name": {
             "type": "string",
+            "description": "Attribute name (must match attribute name in schema)",
             "nullable": true
           },
           "value": {
             "type": "string",
+            "description": "Attribute value",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "The value of an attribute requested in a proof."
       },
       "VerifiedState": {
         "enum": [
           "NotChecked",
           "Verified",
-          "NotVerified"
+          "VerificationFailed"
         ],
         "type": "string",
-        "description": "The verification state of the proof response"
+        "description": "The verification state of the proof response\r\nNotChecked - No attempt has been made to verify the proof\r\nVerified - The proof has been verified\r\nVerificationFailed - Verification was attempted and the proof was found to be invalid"
       },
       "ProofStateModel": {
         "type": "object",
@@ -2245,14 +2239,17 @@
         "properties": {
           "id": {
             "type": "string",
+            "description": "The schema identifier",
             "nullable": true
           },
           "name": {
             "type": "string",
+            "description": "The display name for the schema",
             "nullable": true
           },
           "version": {
             "type": "string",
+            "description": "The schema version. Used to differentiate between schema from the same issuer and same name",
             "nullable": true
           },
           "attributes": {
@@ -2260,10 +2257,17 @@
             "items": {
               "type": "string"
             },
+            "description": "The list of attributes which will be included in any credential created from this schema",
+            "nullable": true
+          },
+          "networkId": {
+            "type": "string",
+            "description": "The schema exists on this ledger network. A schema record only exists on a single ledger",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A Hyperledger Indy Schema"
       },
       "SchemaListResult": {
         "type": "object",
