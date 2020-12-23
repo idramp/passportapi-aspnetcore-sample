@@ -45,7 +45,7 @@ The `/ids` directory that is created on demand is used as a simple file store fo
 
 If you are seeing issues, here are a few things to try, depending on the error:
 
-* Refresh the OpenAPI specification. Go to the `Connected Services` UI in VS to refresh the OpenAPI spec, which will download a new `swagger.json`, and then build the solution--it will generate new client code. Alternatively, you can edit or manually download this file from the documentation site, but the easiest path is to let VS do it.
-*  If you have been trying out this sample app with various wallets, make sure you are using the correct `passportApiBearerToken`.
+* Refresh the OpenAPI specification. Go to the `Connected Services` UI in VS to refresh the OpenAPI spec, which will download a new `swagger.json` from the location specified by the `<SourceUri>` element in the `.csproj`, and then build the solution--it will generate new client code. Alternatively, you can edit or manually download this file from the documentation site.
+* If you have been trying out this sample app with various wallets, make sure you are using the correct `passportApiBearerToken`.
 * If you have been using this sample app on multiple ledgers (networks), try clearing files out of the `/ids` directory, as you may be trying to use a cached ID that is no longer valid on your current ledger.
 * If all else fails, feel free to create an issue in this Github project, or visit idramp.com.
